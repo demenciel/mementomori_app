@@ -25,7 +25,7 @@ const MementoMoriCalendar: React.FC = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedQuote, setSelectedQuote] = useState('');
 
-    const handleSquarePress = (quote: string, index) => {
+    const handleSquarePress = (quote: string, index: number) => {
         // disable the click event if the year is not yet reached
         if (index >= (80 - (Number(timeLeft?.years) + 2))) return;
 
@@ -39,7 +39,7 @@ const MementoMoriCalendar: React.FC = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Memento Mori Calendar</Text>
+            <Text style={styles.title}>Memento Mori Calendar (Years)</Text>
             <View style={styles.gridContainer}>
                 {grid.map((item, index) => (
                     <TouchableOpacity
@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         letterSpacing: 1,
+        textAlign: 'center',
         fontFamily: 'Roboto-Bold',
         color: Colors.light.text,
         marginBottom: verticalScale(20),

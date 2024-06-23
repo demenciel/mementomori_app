@@ -31,8 +31,9 @@ const MainLayout: React.FC = () => {
       const notificationIds = notificationKeys.filter(key => key.startsWith('notificationId_'));
 
       // If notifications are already set, do not set new ones
+
       if (notificationIds.length > 0) {
-        console.log('Notifications already set. Skipping scheduling.');
+        console.log(notificationIds);
         return;
       }
 

@@ -97,6 +97,7 @@ export const cancelAllNotifications = async () => {
         const notificationId = await AsyncStorage.getItem(key);
         if (notificationId) {
             await Notifications.cancelScheduledNotificationAsync(notificationId);
+            // Remove the notificationId from storage
             await AsyncStorage.removeItem(key);
         }
     }

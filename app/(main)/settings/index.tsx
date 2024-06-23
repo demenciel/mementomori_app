@@ -1,4 +1,5 @@
 // app/(main)/swiper/index.tsx
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomOutlineButton from 'components/buttons/CustomOutlineButton';
 import CustomPrimaryButton from 'components/buttons/CustomPrimaryButton';
 import RedirectButton from 'components/buttons/RedirectButton';
@@ -6,7 +7,7 @@ import { auth } from 'constants/firebaseConfig';
 import { useSnackbar } from 'context/SnackbarContext';
 import { useRouter } from 'expo-router';
 import { signOut } from 'firebase/auth';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { verticalScale } from 'react-native-size-matters';
 import { useDispatch } from 'react-redux';
@@ -16,6 +17,7 @@ const SettingsScreen: React.FC = () => {
     const dispatch = useDispatch();
     const { showSnackbar } = useSnackbar();
     const router = useRouter();
+
 
     const handleLogout = () => {
         signOut(auth).then(() => {

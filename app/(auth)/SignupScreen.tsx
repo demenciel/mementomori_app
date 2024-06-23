@@ -70,7 +70,10 @@ const SignupScreen: React.FC = () => {
                     dateOfBirth: new Date(dateOfBirth).toISOString(),
                 }));
                 dispatch(login(token));
-                router.replace('/(main)/home');
+                showSnackbar('Account created successfully', 3000, 'green');
+                setTimeout(() => {
+                    router.replace('/(main)/home');
+                }, 1000);
             }
         } catch (error) {
             // error message from Firebase
