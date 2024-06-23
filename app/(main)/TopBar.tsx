@@ -27,8 +27,9 @@ const TopBar: React.FC<TopBarProps> = ({ title, onPress }) => {
                 onPress={() => {
                     if (onPress) {
                         onPress();
+                    } else {
+                        router.back();
                     }
-                    router.back();
                 }}
             />
             <Text style={styles.title}>{title}</Text>

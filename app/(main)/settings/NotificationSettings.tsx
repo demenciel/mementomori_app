@@ -11,6 +11,7 @@ import SwitchNotifiction from './SwitchNotifiction';
 import { scale, verticalScale } from 'react-native-size-matters';
 import CustomOutlineButton from 'components/buttons/CustomOutlineButton';
 import CustomPicker from 'components/CustomPicker';
+import { useSnackbar } from 'context/SnackbarContext';
 /* import {
     BannerAd,
     BannerAdSize,
@@ -18,6 +19,8 @@ import CustomPicker from 'components/CustomPicker';
 } from 'react-native-google-mobile-ads'; */
 
 const NotificationSettings: React.FC = () => {
+    const router = useRouter();
+    const { showSnackbar } = useSnackbar();
     const [notificationsEnabled, setNotificationsEnabled] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
     const [triggerTime, setTriggerTime] = useState<Date>(new Date());
@@ -58,11 +61,13 @@ const NotificationSettings: React.FC = () => {
         await AsyncStorage.setItem('timeLeft', timeLeft);
 
         if (notificationsEnabled) {
+            await cancelAllNotifications();
             await scheduleMultipleNotifications(triggerTime, frequency, timeLeft);
         } else {
             await cancelAllNotifications();
         }
 
+        showSnackbar('Settings saved', 1000, 'green');
         setOpen(false);
     };
 
@@ -88,7 +93,10 @@ const NotificationSettings: React.FC = () => {
 
     return (
         <>
-            <TopBar onPress={handleSaveSettings} title="Notification Settings" />
+            <TopBar onPress={() => {
+                handleSaveSettings();
+                router.back();
+            }} title="Notification Settings" />
             <View style={styles.container}>
                 <View style={styles.notificationsContainer}>
                     <SwitchNotifiction
@@ -133,7 +141,12 @@ const NotificationSettings: React.FC = () => {
                 <View style={styles.bottomContainer}>
                     <CustomPrimaryButton
                         title="Save"
-                        onPress={handleSaveSettings}
+                        onPress={() => {
+                            handleSaveSettings();
+                            setTimeout(() => {
+                                router.back();
+                            }, 400);
+                        }}
                     />
                 </View>
                 {/*  <View style={styles.bannerAd}>

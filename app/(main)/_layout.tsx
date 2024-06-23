@@ -5,7 +5,7 @@ import { Slot, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors } from 'constants/Colors';
 import Navbar from './Navbar';
-import { getNotificationPermissions, scheduleDailyNotification } from 'services/NotificationService';
+import { cancelAllNotifications, getNotificationPermissions, scheduleDailyNotification, scheduleMultipleNotifications } from 'services/NotificationService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useThemeColor } from 'hooks/useThemeColor';
 import { useTheme } from 'context/ThemeContext';
@@ -22,17 +22,39 @@ const MainLayout: React.FC = () => {
   const themeColors = theme === 'dark' ? Colors.light : Colors.dark;
 
   useEffect(() => {
-    const setupNotifications = async () => {
-      const status = await getNotificationPermissions();
-      const time = await AsyncStorage.getItem('notificationTime');
+    const loadSettings = async () => {
       const enabled = await AsyncStorage.getItem('notificationsEnabled');
-      if (status === 'granted' && enabled === 'true' && time) {
-        scheduleDailyNotification(new Date(time));
+      const time = await AsyncStorage.getItem('notificationTime');
+      const storedFrequency = await AsyncStorage.getItem('notificationFrequency');
+      const timeLeft = await AsyncStorage.getItem('timeLeft');
+      const notificationKeys = await AsyncStorage.getAllKeys();
+      const notificationIds = notificationKeys.filter(key => key.startsWith('notificationId_'));
+
+      // If notifications are already set, do not set new ones
+      if (notificationIds.length > 0) {
+        console.log('Notifications already set. Skipping scheduling.');
+        return;
+      }
+
+      const notificationTime = time ? new Date(time) : new Date();
+      const frequency = storedFrequency ? parseInt(storedFrequency) : 1;
+      const timeLeftFormat = timeLeft || 'years-left';
+
+      if (enabled === 'true') {
+        await cancelAllNotifications();
+        await scheduleMultipleNotifications(notificationTime, frequency, timeLeftFormat);
+      } else {
+        const status = await getNotificationPermissions();
+        if (status === 'granted') {
+          await cancelAllNotifications();
+          await scheduleMultipleNotifications(notificationTime, frequency, timeLeftFormat);
+        }
       }
     };
 
-    setupNotifications();
+    loadSettings();
   }, []);
+
   return (
     <>
       <SafeAreaView edges={['top', 'right', 'left']} style={[styles.container]}>
