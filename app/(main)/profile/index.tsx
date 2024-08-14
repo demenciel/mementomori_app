@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import CalendarPicker from 'components/CalendarPicker';
 import CustomPrimaryButton from 'components/buttons/CustomPrimaryButton';
 import CustomTextInput from 'components/text/CustomTextInput';
+import { Colors } from 'constants/Colors';
 import { db } from 'constants/firebaseConfig';
 import { useSnackbar } from 'context/SnackbarContext';
 import useKeyboard from 'hooks/useKeyboard';
@@ -63,7 +64,11 @@ const ProfileScreen: React.FC = () => {
 
     return (
         <View style={styles.container}>
-
+            <View style={styles.header}>
+                <Text style={styles.title}>
+                    Profile
+                </Text>
+            </View>
             <View style={styles.basicInformation}>
                 <Avatar.Image size={160} source={
                     user?.profileImage
@@ -124,14 +129,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingBottom: verticalScale(20)
     },
+    header: {
+        width: '100%',
+        height: verticalScale(50),
+        justifyContent: 'center',
+        textAlign: 'left',
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.light.tabIconDefault,
+        marginBottom: 20
+    },
+    title: {
+        fontSize: 24,
+        fontFamily: 'Roboto-Bold',
+        color: Colors.light.text,
+    },
     basicInformation: {
         alignItems: 'center',
-        marginBottom: 20
+        marginBottom: verticalScale(20)
     },
     name: {
         fontSize: 20,
         fontWeight: 'bold',
-        marginTop: 10
+        marginTop: verticalScale(10)
     },
     userInfoContainer: {
         flex: 1,

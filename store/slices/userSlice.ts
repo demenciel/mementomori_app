@@ -15,6 +15,7 @@ interface TimeLeft {
     days: number;
     timeLeft: string | undefined;
     yearsPassed: number;
+    weeks: number;
 }
 
 interface UserState {

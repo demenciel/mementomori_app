@@ -1,7 +1,7 @@
 import { Colors } from 'constants/Colors';
 import React, { useEffect, useRef } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import { View, Text, Image, StyleSheet, Animated, Dimensions } from 'react-native';
+import { View, Text, Image, StyleSheet, Animated, Dimensions, Pressable } from 'react-native';
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters';
 
 interface CarouselCardProps {
@@ -12,9 +12,11 @@ interface CarouselCardProps {
     index: number;
     currentIndex: number;
     animatedValue: Animated.Value;
+    data: any;
+    setCurrentIndex: (index: number) => void;
 }
 
-const CarouselCard: React.FC<CarouselCardProps> = ({ title, value, text, image, index, currentIndex, animatedValue }) => {
+const CarouselCard: React.FC<CarouselCardProps> = ({ title, value, text, image, index, currentIndex, animatedValue, data, setCurrentIndex }) => {
     const scale = useRef(new Animated.Value(1)).current;
 
     useEffect(() => {
@@ -32,32 +34,43 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ title, value, text, image, 
         extrapolate: 'clamp',
     });
 
+    const onPressNextCard = () => {
+        if (currentIndex < data.length - 1) {
+            setCurrentIndex(currentIndex + 1);
+        } else {
+            setCurrentIndex(0);
+        }
+    }
+
     return (
-        <Animated.View style={[styles.card, { opacity, transform: [{ scale }] }]}>
-            {/* <LinearGradient
+        <Pressable
+            onPress={onPressNextCard}
+        >
+            <Animated.View style={[styles.card, { opacity, transform: [{ scale }] }]}>
+                {/* <LinearGradient
                 // Background Linear Gradient
                 colors={['rgba(0,0,0,0.4)', 'transparent']}
                 style={styles.background}
             /> */}
-            <Image source={image} style={styles.image} />
-            <View style={styles.itemContent}>
-                <View style={styles.itemContentTextContainer}>
-                    {
-                        value.toString().length > 4 && (
-                            <Text style={styles.title}>{title}</Text>
-                        )
-                    }
-                    <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
-                        <Text style={[styles.value, {
-                            fontSize: value.toString().length > 4 ? 18 : 42,
-                        }]}>{value}</Text>
-                        {value.toString().length <= 4 && (
-                            <Text style={styles.title}>{title}</Text>
-                        )}
+                <Image source={image} style={styles.image} />
+                <View style={styles.itemContent}>
+                    <View style={styles.itemContentTextContainer}>
+                        {
+                            value.toString().length > 4 && (
+                                <Text style={styles.title}>{title}</Text>
+                            )
+                        }
+                        <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+                            <Text style={[styles.value, {
+                                fontSize: value.toString().length > 4 ? 18 : 42,
+                            }]}>{value}</Text>
+                            {value.toString().length <= 4 && (
+                                <Text style={styles.title}>{title}</Text>
+                            )}
+                        </View>
+                        <Text style={styles.prompt}>{text}</Text>
                     </View>
-                    <Text style={styles.prompt}>{text}</Text>
-                </View>
-                {/* <View style={styles.paginationContainer}>
+                    {/* <View style={styles.paginationContainer}>
                     <View style={styles.pagination}>
                         {data.map((_, index) => (
                             <View
@@ -70,8 +83,9 @@ const CarouselCard: React.FC<CarouselCardProps> = ({ title, value, text, image, 
                         ))}
                     </View>
                 </View> */}
-            </View>
-        </Animated.View>
+                </View>
+            </Animated.View>
+        </Pressable>
     );
 };
 

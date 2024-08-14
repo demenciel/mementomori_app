@@ -50,10 +50,12 @@ const PasswordRecovery: React.FC = () => {
             <Text style={styles.title}>Password Recovery</Text>
             <CustomTextInput
                 placeholder="Email"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
-                autoCapitalize="none"
+                inputValue={email}
+                setInputValue={setEmail}
+                style={{ marginBottom: verticalScale(20) }}
+                inputConditions={(text) => text.length <= 50}
+                icon="mail"
+                isValid={email !== ''}
             />
             {
                 !keyboard && (

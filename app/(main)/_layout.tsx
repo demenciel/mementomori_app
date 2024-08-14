@@ -33,7 +33,6 @@ const MainLayout: React.FC = () => {
       // If notifications are already set, do not set new ones
 
       if (notificationIds.length > 0) {
-        console.log(notificationIds);
         return;
       }
 

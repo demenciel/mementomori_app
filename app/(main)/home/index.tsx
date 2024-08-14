@@ -21,6 +21,7 @@ const MainPage: React.FC = () => {
     const [timeLeft, setTimeLeft] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
     const [years, setYears] = useState<number>(0);
+    const [weeks, setWeeks] = useState<number>(0);
     const [seasons, setSeasons] = useState<number>(0);
     const [months, setMonths] = useState<number>(0);
     const [days, setDays] = useState<number>(0);
@@ -81,6 +82,7 @@ const MainPage: React.FC = () => {
         await AsyncStorage.setItem('seasons', data.seasons.toString());
         await AsyncStorage.setItem('months', data.months.toString());
         await AsyncStorage.setItem('days', data.days.toString());
+        await AsyncStorage.setItem('weeks', data.weeks.toString());
     }
 
     const calculateYearsSeasonsMonths = useCallback(async (endDate: Date) => {
@@ -111,6 +113,7 @@ const MainPage: React.FC = () => {
 
         setYearsPassed(80 - years);
         setDays(daysExact);
+        setWeeks(Math.floor(daysExact / 7));
         setYears(years);
         setSeasons(totalSeasons);
         setMonths(years * 12 + months);
@@ -120,12 +123,14 @@ const MainPage: React.FC = () => {
             months: years * 12 + months,
             days: daysExact,
             yearsPassed: 80 - years,
+            weeks: Math.floor(daysExact / 7),
             timeLeft: `${years} years, ${months} months, ${days} days`,
         }));
         setAsyncStorageData({
             years: years,
             seasons: totalSeasons,
             months: years * 12 + months,
+            weeks: Math.floor(daysExact / 7),
             days: daysExact,
         });
     }, [userTimeLeft]);
@@ -156,6 +161,7 @@ const MainPage: React.FC = () => {
                     months: months,
                     timeLeft: timeLeft,
                     days: days,
+                    weeks: weeks,
                 }}
             />
         </View>

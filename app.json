@@ -1,0 +1,59 @@
+{
+  "expo": {
+    "name": "mementomori",
+    "slug": "mementomori",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icons/android/drawable-hdpi/android-sm-icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-4038412906454517~9010611157"
+      },
+      "bundleIdentifier": "com.imperfectdating.mementomori"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icons/android/drawable-hdpi/android-sm-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-4038412906454517~6959162889"
+      },
+      "package": "com.imperfectdating.mementomori"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "expo-calendar",
+      "expo-camera",
+      "expo-location",
+      "expo-media-library",
+      "expo-notifications"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "855119b8-040c-4afa-b6c0-0fe3a98e365c"
+      }
+    },
+    "owner": "imperfectdating"
+  }
+}

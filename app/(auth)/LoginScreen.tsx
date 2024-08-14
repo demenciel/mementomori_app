@@ -92,6 +92,7 @@ const LoginScreen: React.FC = () => {
                     />
                     <CustomTextInput
                         placeholder="Email"
+                        keyboardType='email-address'
                         inputValue={email}
                         setInputValue={setEmail}
                         inputConditions={(text) => text.length <= 50}

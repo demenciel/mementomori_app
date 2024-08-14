@@ -1,0 +1,45 @@
+{
+  "cli": {
+    "version": ">= 10.0.2"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_FIREBASE_PROJECT_ID": "mementomori-babc5",
+        "EXPO_PUBLIC_FIREBASE_API_KEY": "AIzaSyBJep5q7s_bsnlP9yRfU5TqT3lZ77_Flls",
+        "EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN": "mementomori-babc5.firebaseapp.com",
+        "EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET": "mementomori-babc5.appspot.com",
+        "EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID": "322951360709",
+        "EXPO_PUBLIC_FIREBASE_APP_ID": "1:322951360709:web:d90c355f5d492a6c9480ac",
+        "EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID": "G-S0H8KJ306L",
+        "EXPO_PUBLIC_ADMOB_ANDROID_CALENDAR_BANNER_ID": "ca-app-pub-4038412906454517~6959162889",
+        "EXPO_PUBLIC_ADMOB_ANDROID_PROFILE_BANNER_ID": "ca-app-pub-4038412906454517/7713502048",
+        "EXPO_PUBLIC_ADMOB_IOS_CALENDAR_BANNER_ID": "ca-app-pub-4038412906454517/9748977755",
+        "EXPO_PUBLIC_ADMOB_IOS_PROFILE_BANNER_ID": "ca-app-pub-4038412906454517/1430330578"
+      }
+    },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {
+      "env": {
+        "EXPO_PUBLIC_FIREBASE_PROJECT_ID": "mementomori-babc5",
+        "EXPO_PUBLIC_FIREBASE_API_KEY": "AIzaSyBJep5q7s_bsnlP9yRfU5TqT3lZ77_Flls",
+        "EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN": "mementomori-babc5.firebaseapp.com",
+        "EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET": "mementomori-babc5.appspot.com",
+        "EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID": "322951360709",
+        "EXPO_PUBLIC_FIREBASE_APP_ID": "1:322951360709:web:d90c355f5d492a6c9480ac",
+        "EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID": "G-S0H8KJ306L",
+        "EXPO_PUBLIC_ADMOB_ANDROID_CALENDAR_BANNER_ID": "ca-app-pub-4038412906454517~6959162889",
+        "EXPO_PUBLIC_ADMOB_ANDROID_PROFILE_BANNER_ID": "ca-app-pub-4038412906454517/7713502048",
+        "EXPO_PUBLIC_ADMOB_IOS_CALENDAR_BANNER_ID": "ca-app-pub-4038412906454517/9748977755",
+        "EXPO_PUBLIC_ADMOB_IOS_PROFILE_BANNER_ID": "ca-app-pub-4038412906454517/1430330578"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

@@ -12,6 +12,7 @@ interface TimeLeft {
     months: number;
     timeLeft: string;
     days: number;
+    weeks: number;
 }
 
 interface CountdownCarouselProps {
@@ -34,11 +35,10 @@ const CountdownCarousel: React.FC<CountdownCarouselProps> = ({ timeLeft }) => {
         },
         {
             image: require('assets/images/home.png'),
-            title: 'Months Left',
-            value: timeLeft.months || 'Calculating ...',
-            text: "Cherish every month as a new beginning."
+            title: 'Years Left',
+            value: timeLeft.years || 'Calculating ...',
+            text: "Make each year count."
         },
-
         {
             image: require('assets/images/home.png'),
             title: 'Seasons Left',
@@ -47,10 +47,17 @@ const CountdownCarousel: React.FC<CountdownCarouselProps> = ({ timeLeft }) => {
         },
         {
             image: require('assets/images/home.png'),
-            title: 'Years Left',
-            value: timeLeft.years || 'Calculating ...',
-            text: "Make each year count."
+            title: 'Months Left',
+            value: timeLeft.months || 'Calculating ...',
+            text: "Cherish every month as a new beginning."
         },
+        {
+            image: require('assets/images/home.png'),
+            title: 'Weeks Left',
+            value: timeLeft?.weeks || 'Calculating ...',
+            text: "Make the most of every week."
+        },
+
         {
             image: require('assets/images/home.png'),
             title: 'Days Left',
@@ -75,6 +82,8 @@ const CountdownCarousel: React.FC<CountdownCarouselProps> = ({ timeLeft }) => {
                         index={itemIndex}
                         currentIndex={currentIndex}
                         animatedValue={animatedValue}
+                        data={data}
+                        setCurrentIndex={setCurrentIndex}
                     />
                 )}
             />

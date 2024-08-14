@@ -47,9 +47,7 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
             <RNTextInput
                 value={inputValue}
                 onChangeText={(text) => {
-                    if (inputConditions(text)) {
-                        setInputValue(text);
-                    }
+                    setInputValue(text);
                 }}
                 onFocus={handleFocus}
                 secureTextEntry={hidden}

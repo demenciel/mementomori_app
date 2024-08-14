@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomOutlineButton from 'components/buttons/CustomOutlineButton';
 import CustomPrimaryButton from 'components/buttons/CustomPrimaryButton';
 import RedirectButton from 'components/buttons/RedirectButton';
+import { Colors } from 'constants/Colors';
 import { auth } from 'constants/firebaseConfig';
 import { useSnackbar } from 'context/SnackbarContext';
 import { useRouter } from 'expo-router';
@@ -35,20 +36,42 @@ const SettingsScreen: React.FC = () => {
 
     return (
         <View style={styles.container}>
-            <RedirectButton
-                title='Notifications'
-                icon='bell'
-                onPress={() => {
-                    router.push('(main)/settings/NotificationSettings');
-                }}
-            />
-            <RedirectButton
-                title='Logout'
-                icon='log-out'
-                onPress={() => {
-                    handleLogout();
-                }}
-            />
+            <View style={styles.header}>
+                <Text style={styles.title}>
+                    Settings
+                </Text>
+            </View>
+            <View style={styles.section}>
+                <Text style={styles.subtitle}>
+                    Notifications
+                </Text>
+                <RedirectButton
+                    title='Push Notifications'
+                    icon='bell'
+                    onPress={() => {
+                        router.push('(main)/settings/NotificationSettings');
+                    }}
+                />
+            </View>
+            <View style={styles.section}>
+                <Text style={styles.subtitle}>
+                    Account
+                </Text>
+                <RedirectButton
+                    title='Logout'
+                    icon='log-out'
+                    onPress={() => {
+                        handleLogout();
+                    }}
+                />
+                <RedirectButton
+                    title='Delete'
+                    icon='trash'
+                    onPress={() => {
+                        router.push('(main)/settings/DeleteAccountScreen');
+                    }}
+                />
+            </View>
         </View>
     );
 };
@@ -60,7 +83,32 @@ const styles = StyleSheet.create({
         paddingVertical: verticalScale(20),
         justifyContent: 'flex-start',
         alignItems: 'center',
-    }
+    },
+    header: {
+        width: '100%',
+        height: verticalScale(50),
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.light.tabIconDefault,
+    },
+    section: {
+        width: '100%',
+        paddingVertical: verticalScale(10),
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+    title: {
+        fontSize: 24,
+        fontFamily: 'Roboto-Bold',
+    },
+    subtitle: {
+        fontSize: 20,
+        width: '100%',
+        textAlign: 'left',
+        fontFamily: 'Roboto-Bold',
+        marginVertical: verticalScale(10),
+    },
 });
 
 export default SettingsScreen;
